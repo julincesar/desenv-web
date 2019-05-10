@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="estilo.css">
+    </head>
+
+    <body>
+
+
+    <h1>Lista de Tarefas a fazer</h1>
+    <form>
+    Projeto:<br>
+    <input type="text" id="projeto">
+    <br>
+    Descrição:<br>
+    <input type="text" id="descricao">
+    <br>
+    Atribuído a:<br>
+    <input type="text" id="executor">
+    <br>
+    Prazo:<br>
+    <input type="text" id="prazo">
+    <br>
+
+    <button type="button" onclick="adicionarTarefa()">Nova Tarefa</button>
+    </form>
+
+    <div id="Projetos">
+
+        <div id="Coisas a fazer">
+            <h2>Projeto: Coisas a fazer</h2>
+            <ul>
+                <li id="enx">
+                    <label>Atribuído a:</label>
+                    <span>Júlio</span>
+                    <p>Enxugar os pratos</p>
+                    <span>15 minutos</span>
+                    <div>
+                        <button>Editar</button>
+                        <button onclick="excluir('enx')">Excluir</button>
+                    </div>
+                </li>
+                <li>
+                    <label>Atribuído a:</label>
+                    <span>Júlio</span>
+                    <p>Levar os meninos pra escola</p>
+                    <span>45 minutos</span>
+                    <div>
+                        <button>Editar</button>
+                        <button>Excluir</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <script src="javas.js"></script>
+
+    </body>
+
+</html>

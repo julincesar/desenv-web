@@ -9,52 +9,45 @@
     <body>
 
 
-    <h1>Lista de Tarefas a fazer</h1>
+    <h1>LISTA DE TAREFAS A FAZER</h1>
     <form>
-    Projeto:<br>
+    <div class="grid-container">
+    <label>Projeto:</label>
     <input type="text" id="projeto">
-    <br>
-    Descrição:<br>
-    <input type="text" id="descricao">
-    <br>
-    Atribuído a:<br>
+    <label>Descrição:</label>
+    <textarea id="descricao"></textarea>
+    <label>Atribuído a:</label>
     <input type="text" id="executor">
-    <br>
-    Prazo:<br>
+    <label>Prazo:</label>
     <input type="text" id="prazo">
     <br>
-
     <button type="button" onclick="adicionarTarefa()">Nova Tarefa</button>
+    </div>
     </form>
 
     <div id="Projetos">
 
-        <div id="Coisas a fazer">
-            <h2>Projeto: Coisas a fazer</h2>
-            <ul>
-                <li id="enx">
-                    <label>Atribuído a:</label>
-                    <span>Júlio</span>
-                    <p>Enxugar os pratos</p>
-                    <span>15 minutos</span>
-                    <div>
-                        <button>Editar</button>
-                        <button onclick="excluir('enx')">Excluir</button>
-                    </div>
-                </li>
-                <li>
-                    <label>Atribuído a:</label>
-                    <span>Júlio</span>
-                    <p>Levar os meninos pra escola</p>
-                    <span>45 minutos</span>
-                    <div>
-                        <button>Editar</button>
-                        <button>Excluir</button>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
+<!--         <button class="accordion">Coisas a fazer</button>
+        <div class="panel flex-container" id="Coisas a fazer">
+            <div class="card">
+                <h2>Enxugar os pratos</h2>
+                <p>Júlio Pacheco</p>
+                <p class="price">15 minutos</p>
+                <div class="btn-group">
+                    <button>Editar</button>
+                    <button>Excluir</button>
+                </div> 
+            </div> 
+            <div class="card">
+                <h2>Levar os Meninos pra escola</h2>
+                <p>Júlio Pacheco</p>
+                <p class="price">14 minutos</p>
+                <div class="btn-group">
+                    <button>Editar</button>
+                    <button>Excluir</button>
+                </div> 
+            </div> 
+        </div> -->
     </div>
     <script src="javas.js"></script>
 

@@ -1,3 +1,18 @@
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+
 function adicionarTarefa() {
     var projeto = document.getElementById("projeto").value;
     var descricao = document.getElementById("descricao").value;
@@ -26,10 +41,9 @@ function adicionarTarefa() {
         projElem = criarProjeto(projeto);
     }
 
-    var unli = projElem.getElementsByTagName("ul")[0];
     var iden = makeid(6);
     var lista = criarLista(iden, projeto, descricao, executor, prazo);
-    unli.appendChild(lista);
+    projElem.appendChild(lista);
 
     document.getElementById("projeto").value = "";
     document.getElementById("descricao").value = "";
@@ -43,25 +57,23 @@ function adicionarTarefa() {
 
   function editar(noh) {
     /* TODO */
+    alert("A implementar.");
   }
 
 function criarLista(iden, projeto, descricao, executor, prazo) {
 
-    var lab = document.createElement("label");
-    var t = document.createTextNode("Atribuído a:");
-    lab.appendChild(t);
+    var h2El = document.createElement("h2");
+    var t = document.createTextNode(descricao);
+    h2El.appendChild(t);
 
-    var spa = document.createElement("span");
+    var spa = document.createElement("p");
     t = document.createTextNode(executor);
     spa.appendChild(t);
 
     var para = document.createElement("p");
-    t = document.createTextNode(descricao);
-    para.appendChild(t);
-
-    var spa2 = document.createElement("span");
+    para.setAttribute("class", "price");
     t = document.createTextNode(prazo);
-    spa2.appendChild(t);
+    para.appendChild(t);
 
     var but1 = document.createElement("button");
     t = document.createTextNode("Editar");
@@ -74,36 +86,45 @@ function criarLista(iden, projeto, descricao, executor, prazo) {
     but2.setAttribute("onclick", "excluir('" + iden + "')");
 
     var div1 = document.createElement("div");
+    div1.setAttribute("class", "btn-group");
     div1.appendChild(but1);
     div1.appendChild(but2);
 
-    var lista = document.createElement("LI");
+    var lista = document.createElement("div");
     lista.setAttribute("id", iden);
-    lista.appendChild(lab);
+    lista.setAttribute("class", "card");
+    lista.appendChild(h2El);
     lista.appendChild(spa);
     lista.appendChild(para);
-    lista.appendChild(spa2);
     lista.appendChild(div1);
     
-
     return lista;
 }
 
 function criarProjeto(projeto) {
-    var divproj = document.createElement("div");
-    divproj.setAttribute("id", projeto);
 
-    var h2El = document.createElement("h2");
-    var t = document.createTextNode("Projeto: " + projeto);
-    h2El.appendChild(t);
+    var butEl = document.createElement("button");
+    var t = document.createTextNode(projeto);
+    butEl.appendChild(t);
+    butEl.setAttribute("class", "accordion");
+    
+    butEl.addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight){
+            panel.style.maxHeight = null;
+        } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+    });
+    
+    var divpanel = document.createElement("div");
+    divpanel.setAttribute("class", "panel flex-container");
+    divpanel.setAttribute("id", projeto);
 
-    var ulEl = document.createElement("ul");
-
-    divproj.appendChild(h2El);
-    divproj.appendChild(ulEl);
-
-    document.body.appendChild(divproj);
-    return divproj;
+    document.getElementById("Projetos").appendChild(butEl);
+    document.getElementById("Projetos").appendChild(divpanel);
+    return divpanel;
  }
 
 function makeid(length) {
@@ -115,3 +136,5 @@ function makeid(length) {
     }
     return result;
  }
+
+

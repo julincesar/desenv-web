@@ -48,22 +48,6 @@ function adicionarTarefa() {
   limparForm();
 }
 
-function limparForm() {
-  document.getElementById("projeto").value = "";
-  document.getElementById("descricao").value = "";
-  document.getElementById("executor").value = "";
-  document.getElementById("prazo").value = "";
-}
-
-function excluir(noh) {
-  document.getElementById(noh).remove();
-}
-
-function editar(noh) {
-  /* TODO */
-  alert("A implementar.");
-}
-
 function atualizarTarefas() {
   //Remover todas as tarefas existentes e adicionar o que vier da chamada do serviço
   var projs = document.getElementById("Projetos");
@@ -73,10 +57,38 @@ function atualizarTarefas() {
   
 }
 
-function adicionarTarefas(tarefas) {
-  tarefas.forEach(tarefa => {
+function adicionarTarefas(arrayTarefas) {
+  tarefas = arrayTarefas;
+  arrayTarefas.forEach(tarefa => {
     criarCard(tarefa);
   });
+}
+
+//Este método envia para o servidor a lista de tarefas para que seja persistida
+function salvarAlteracoes() {
+  gravar(tarefas, avisarGravacao);
+}
+
+function avisarGravacao() {
+  alert('Gravação realizada com sucesso!');
+}
+
+function limparForm() {
+  document.getElementById("projeto").value = "";
+  document.getElementById("descricao").value = "";
+  document.getElementById("executor").value = "";
+  document.getElementById("prazo").value = "";
+}
+
+function excluir(noh) {
+  //Remover do array de tarefas
+  tarefas = tarefas.filter(obj => obj.id !== noh);
+  document.getElementById(noh).remove();
+}
+
+function editar(noh) {
+  /* TODO */
+  alert("A implementar.");
 }
 
 function removerFilhos(pai) {

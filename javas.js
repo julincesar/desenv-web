@@ -35,25 +35,16 @@ function adicionarTarefa() {
     return;
   }
   var iden = makeid(6);
-  tarefa = {"id": iden,
-            "projeto" : projeto,
-            "descricao" : descricao,
-            "executor" : executor,
-            "prazo" : prazo
-          }
+  tarefa = {
+    "id": iden,
+    "projeto": projeto,
+    "descricao": descricao,
+    "executor": executor,
+    "prazo": prazo
+  }
   tarefas.push(tarefa);
 
-
-  var projElem = document.getElementById(projeto);
-
-  if (projElem == null) {
-    //Cria um novo projeto se não tiver encontrado um existente
-    projElem = criarProjeto(projeto);
-  }
-
-  var card = criarCard(tarefa);
-  projElem.appendChild(card);
-
+  criarCard(tarefa);
   limparForm();
 }
 
@@ -73,36 +64,64 @@ function editar(noh) {
   alert("A implementar.");
 }
 
-function criarCard(tarefa) {
+function atualizarTarefas() {
+  //Remover todas as tarefas existentes e adicionar o que vier da chamada do serviço
+  var projs = document.getElementById("Projetos");
+  removerFilhos(projs);
 
+  buscarTarefas(adicionarTarefas);
+  
+}
+
+function adicionarTarefas(tarefas) {
+  tarefas.forEach(tarefa => {
+    criarCard(tarefa);
+  });
+}
+
+function removerFilhos(pai) {
+  while (pai.firstChild) {
+    pai.removeChild(pai.firstChild);
+  }
+}
+
+
+function criarCard(tarefa) {
+  var projElem = document.getElementById(tarefa.projeto);
+
+  if (projElem == null) {
+    //Cria um novo projeto se não tiver encontrado um existente
+    projElem = criarProjeto(tarefa.projeto);
+  }
+  
   var h2El = document.createElement("h2");
   var t = document.createTextNode(tarefa.descricao);
   h2El.appendChild(t);
-
+  
   var spa = document.createElement("p");
   t = document.createTextNode(tarefa.executor);
   spa.appendChild(t);
-
+  
   var para = document.createElement("p");
   para.setAttribute("class", "price");
   t = document.createTextNode(tarefa.prazo);
   para.appendChild(t);
-
+  
   var but1 = document.createElement("button");
   t = document.createTextNode("Editar");
   but1.appendChild(t);
   but1.setAttribute("onclick", "editar('" + tarefa.id + "')");
-
+  
   var but2 = document.createElement("button");
   t = document.createTextNode("Excluir");
   but2.appendChild(t);
   but2.setAttribute("onclick", "excluir('" + tarefa.id + "')");
-
+  
   var div1 = document.createElement("div");
   div1.setAttribute("class", "btn-group");
   div1.appendChild(but1);
   div1.appendChild(but2);
-
+  
   var card = document.createElement("div");
   card.setAttribute("id", tarefa.id);
   card.setAttribute("class", "card");
@@ -110,8 +129,8 @@ function criarCard(tarefa) {
   card.appendChild(spa);
   card.appendChild(para);
   card.appendChild(div1);
-
-  return card;
+  
+  projElem.appendChild(card);
 }
 
 function criarProjeto(projeto) {
